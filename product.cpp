@@ -1,4 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+
+#define R_SIFIR  "\033[0m"
+#define R_KIRMIZI "\033[1;31m"
+
 
 struct Urun {
     int id;
@@ -10,6 +16,13 @@ struct Urun {
 
 void urunEkle() {
     struct Urun yeniUrun;
+    
+    FILE *dosya = fopen("Urunler.txt", "a");
+    
+    if (dosya == NULL) {
+        printf("Dosya acilamadi!\n");
+        return;
+    }
     
     printf("\n--- Yeni Urun Ekleme ---\n");
     
@@ -23,11 +36,13 @@ void urunEkle() {
     scanf("%d", &yeniUrun.stok);
     
     printf("Fiyat: ");
-    scanf("%f", &yeniUrun.fiyat);
+    scanf("%f", &yeniUrun.fiyat);	
     
     printf("Eklendigi Tarih (GG.AA.YYYY): ");
     scanf("%s", yeniUrun.tarih);
     
+fprintf(dosya, "%d %s %d %.2f %s\n", yeniUrun.id, yeniUrun.isim, yeniUrun.stok, yeniUrun.fiyat, yeniUrun.tarih);    
+fclose(dosya);
     printf("\n>>> Urun Basariyla Alindi: %s (ID: %d)\n", yeniUrun.isim, yeniUrun.id);
 }
 
@@ -42,6 +57,7 @@ void urunMenu() {
     
     printf("Seciminiz: ");
     scanf("%d", &secim);  
+    
     
     switch(secim) {
         case 1:
@@ -65,9 +81,9 @@ int main() {
     int secim;
 
     printf("+------------------+   +------------------+   +------------------+\n");
-    printf("|      URUN        |   |      SIPARIS      |   |      satis       |\n");
+    printf("|      URUN        |   |      SIPARIS     |   |      satis       |\n");
     printf("+------------------+   +------------------+   +------------------+\n\n");
-    printf("1 - Urun Islemleri\n");
+    printf("1- Urun Islemleri\n");
     printf("2 - Siparis Islemleri\n");
     printf("3 - Kaydet ve Cik\n");
     

@@ -27,7 +27,7 @@ void urunEkle() {
     printf("\n--- Yeni Urun Ekleme ---\n");
     
     printf("Urun ID: ");
-    scanf("%d", &yeniUrun.id);
+    scanf("%d", yeniUrun.id);
     
     printf("Urun Ismi: ");
     scanf("%s", yeniUrun.isim);
